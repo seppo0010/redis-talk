@@ -13,12 +13,13 @@
 	<link rel="stylesheet" href="./seppo.css" type="text/css">
 	<script src="deck.js/modernizr.custom.js"></script>
 </head>
-<body class="deck-container">
+<body class="deck-container" style="width:1024px;">
 
 <div class="slide">
 	<h1>Beneficiarte de agregar Redis (NoSQL) a tu servidor</h1>
 	<p>por @seppo0010<br />
 	(basado en un blogpost de @antirez)</p>
+	<span class="hidden-notes">Suerte! :P</span>
 </div>
 <div class="slide">
 	<h2>Un poco de m&iacute;</h2>
@@ -37,8 +38,10 @@
 	<p>La persistencia puede ser por snapshots o append-only file.</p>
 	<p>No soporta sharding (todavía)</p>
 	<p>Es clave-valor con valores tipados (string, list, set, sorted set, hash)</p>
+	<span class="hidden-notes">Enfasis en que como guarda todo en <b>memoria</b> y no tiene <b>sharding</b>, y que puede traer problemas con datos grandes<br />Es MUY <b>rápido</b>.</span>
 </div>
 <div class="slide">
+	<span class="hidden-notes">Cadena de bytes. Binary safe. Encoding safe.</span>
 	<h2>Strings</h2>
 	<p>redis&gt; <span class="slide">SET miclave mivalor</span><br />
 	<span class="slide"><span class="server-reply">OK</span><br />
@@ -46,7 +49,7 @@
 	<span class="slide"><span class="server-reply">(integer) 17</span><br />
 	redis&gt; </span><span class="slide" />GET miclave</span><br />
 	<span class="slide"><span class="server-reply">"mivalor de prueba"</span><br />
-	redis&gt; </span><span class="slide" />SUBSTR miclave 10 -1</span><br />
+	redis&gt; </span><span class="slide" />SUBSTR miclave 10 -1<span class="hidden-notes">Los valores negativos empiezan a contar desde el final.</span></span><br />
 	<span class="slide"><span class="server-reply">" prueba"</span><br />
 	redis&gt; </span><span class="slide" />SET int 1</span><br />
 	<span class="slide"><span class="server-reply">OK</span><br />
@@ -56,14 +59,15 @@
 	<span class="slide"><span class="server-reply">(integer) 7</span></span>
 </div>
 <div class="slide">
+	<span class="hidden-notes">Lista de strings ordenada por inserción (FIFO/LIFO).</span>
 	<h2>Lists</h2>
-	<p>redis&gt; <span class="slide">RPUSH milista A</span><br />
+	<p>redis&gt; <span class="slide">RPUSH milista A<span class="hidden-notes">Insertando por la derecha.</span></span><br />
 	<span class="slide"><span class="server-reply">(integer) 1</span><br />
 	redis&gt; </span><span class="slide" />RPUSH milista B</span><br />
 	<span class="slide"><span class="server-reply">(integer) 2</span><br />
 	redis&gt; </span><span class="slide" />RPUSH milista C</span><br />
 	<span class="slide"><span class="server-reply">(integer) 3</span><br />
-	redis&gt; </span><span class="slide" />LPOP milista</span><br />
+	redis&gt; </span><span class="slide" />LPOP milista<span class="hidden-notes">Leyendo y borrando por la izquierda (FIFO).</span></span><br />
 	<span class="slide"><span class="server-reply">"A"</span><br />
 	redis&gt; </span><span class="slide" />LLEN milista</span><br />
 	<span class="slide"><span class="server-reply">(integer) 2</span><br />
@@ -74,6 +78,7 @@
 	</span></span>
 </div>
 <div class="slide">
+	<span class="hidden-notes">Conjunto de strings desordenado.</span>
 	<h2>Sets</h2>
 	<p>redis&gt; <span class="slide">SADD letras A</span><br />
 	<span class="slide"><span class="server-reply">(integer) 1</span><br />
@@ -83,7 +88,7 @@
 	<span class="slide"><span class="server-reply">(integer) 2</span><br />
 	redis&gt; </span><span class="slide" />SADD letras C</span><br />
 	<span class="slide"><span class="server-reply">(integer) 3</span><br />
-	redis&gt; </span><span class="slide" />SCARD letras</span><br />
+	redis&gt; </span><span class="slide" />SCARD letras<span class="hidden-notes">Saber la cardinalidad.</span></span><br />
 	<span class="slide"><span class="server-reply">(integer) 3</span><br />
 	redis&gt; </span><span class="slide" />SADD vocales A E I O U</span><br />
 	<span class="slide"><span class="server-reply">(integer) 5</span><br />
@@ -93,6 +98,7 @@
 	</span></span>
 </div>
 <div class="slide">
+	<span class="hidden-notes">Conjunto de strings ordenado. Cada string tiene un único valor numérico.</span>
 	<h2>Sorted Sets</h2>
 	<p>redis&gt; <span class="slide">ZADD misortedset 10 j</span><br />
 	<span class="slide"><span class="server-reply">(integer) 1</span><br />
@@ -100,12 +106,12 @@
 	<span class="slide"><span class="server-reply">(integer) 1</span><br />
 	redis&gt; </span><span class="slide" />ZADD misortedset 1 a</span><br />
 	<span class="slide"><span class="server-reply">(integer) 1</span><br />
-	redis&gt; </span><span class="slide" />ZRANGE misortedset 0 1</span><br />
+	redis&gt; </span><span class="slide" />ZRANGE misortedset 0 1<span class="hidden-notes">Consulta por posición.</span></span><br />
 	<span class="slide"><span class="server-reply">
 	1) "a"<br />
 	2) "j"
 	</span><br />
-	redis&gt; </span><span class="slide" />ZRANGEBYSCORE misortedset 0 1</span><br />
+	redis&gt; </span><span class="slide" />ZRANGEBYSCORE misortedset 0 1<span class="hidden-notes">Consulta por valor.</span></span><br />
 	<span class="slide"><span class="server-reply">1) "a"</span><br />
 	redis&gt; </span><span class="slide" />ZSCORE misortedset j</span><br />
 	<span class="slide"><span class="server-reply">(integer) 10</span><br />
@@ -113,6 +119,7 @@
 	<span class="slide"><span class="server-reply">(integer) 2</span></span>
 </div>
 <div class="slide">
+	<span class="hidden-notes">Mapa de string clave a string valor.</span>
 	<h2>Hash</h2>
 	<p>redis&gt; <span class="slide">HMSET mihash nombre sebastian edad 26</span><br />
 	<span class="slide"><span class="server-reply">OK</span><br />
@@ -131,6 +138,7 @@
 	<span class="slide"><span class="server-reply">(integer) 1</span></span>
 </div>
 <div class="slide">
+	<span class="hidden-notes">La idea no es abandonar el motor de base de datos que tengan, sea lo que sea, en favor de Redis, sino que Redis se puede sumar a las capas.</span>
 	<h2>&iquest;Agregar Redis a tu servidor?</h2>
 	<p>El objetivo de la charla es demostrar como cuando se agregan nuevas funcionalidades a un servidor existente, Redis puede ser una alternativa a tener en cuenta, sin necesidad de migrar los modelos de datos existentes.</p>
 </div>
@@ -168,6 +176,7 @@
 	</table>
 </div>
 <div class="slide">
+	<span class="hidden-notes">Cada usuario puede registrar su máximo puntaje en el servidor.</span>
 	<h2>Tabla de máximos puntajes</h2>
 	<table>
 		<thead class="slide">
@@ -207,6 +216,7 @@
 	</table>
 </div>
 <div class="slide">
+	<span class="hidden-notes">Pero para ser honesto, simplifiqué un poco... el caso más común sería este</span>
 	<h2>Tabla de máximos puntajes</h2>
 	<table>
 		<tr class="slide">
@@ -238,12 +248,13 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;break;<br />
 			&nbsp;&nbsp;}<br />
 			}
+			<span class="hidden-notes">Es un poco más complicado garantizar la atomicidad de la operación. Nos suscribimos a la clave que nos interesa, hacemos la transacción y si no tenemos éxito (porque alguien más quiso editar la misma clave) reintentamos.</span>
 			</td>
 		</tr>
 	</table>
 </div>
 <div class="slide">
-	<h2>Tabla de máximos puntajes</h2>
+	<h2>Visitantes únicos</h2>
 	<table>
 		<thead class="slide">
 			<tr>
@@ -288,14 +299,16 @@
 	<p>O sea, cada minuto que la aplicaci&oacute;n está abierta se borran las notificaciones que el usuario tiene agendadas y se vuelven a insertar.</p>
 </div>
 <div class="slide">
-	<h2>Modelo de Datos con MySQL</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>Modelo de Datos con MySQL</h3>
 	<p>Tabla: device_id, date.</p>
 	<p>&Iacute;ndice en la columna date.</p>
 	<p>&Iacute;ndice en la columna device_id.</p>
 	<p>&Iacute;ndice &uacute;nico para la combinaci&oacute;n date+device_id.</p>
 </div>
 <div class="slide">
-	<h2>Modelo de Datos con Redis</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>Modelo de Datos con Redis</h3>
 	<p>Sorted Set en la clave "PN".</p>
 	<p>El "score" es la fecha en que debe ser enviado (timestamp).</p>
 	<p>El valor es el device_id.</p>
@@ -303,36 +316,43 @@
 	<p>Ej: si tengo que notificar al device "qwe" en los momentos 1, 3, 7 y 23 voy a agregar al Sorted Set "qwe" con valor 1 y crear una lista en la clave "PN:qwe" con los valores "3", "7" y "23".</p>
 </div>
 <div class="slide">
-	<h2>&iquest;C&oacute;mo se agendan las notificaciones?</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>&iquest;C&oacute;mo se agendan las notificaciones?</h3>
 	<img src="code1.png" />
 </div>
 <div class="slide">
-	<h2>&iquest;C&oacute;mo veo que notificaciones enviar??</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>&iquest;C&oacute;mo veo que notificaciones enviar??</h3>
 	<img src="code2.png" />
 </div>
 <div class="slide">
-	<h2>Después de enviar la notificaci&oacute;n, ¿C&oacute;mo se agenda la siguiente?</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>Después de enviar la notificaci&oacute;n, ¿C&oacute;mo se agenda la siguiente?</h3>
 	<img src="code3.png" />
 </div>
 <div class="slide">
-	<h2>¿Resultados?</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>¿Resultados?</h3>
 	<p>Con MySQL esta lógica generaba un problema de performance.</p>
 	<p>Con Redis no.</p>
 	<p>Aumentó nuestra cantidad de usuarios y no llegan más notificaciones de problemas en la base de datos.</p>
 	<p>No abandonamos MySQL para el resto de las operaciones.</p>
 </div>
 <div class="slide">
-	<h2>Mediciones (cantidad de mensajes encolados)</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>Mediciones (cantidad de mensajes encolados)</h3>
 	<img src="graph1.png" />
 </div>
 <div class="slide">
-	<h2>Mediciones (consumo de memoria)</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>Mediciones (consumo de memoria)</h3>
 	<img src="graph2.png" />
 </div>
 <div class="slide">
-	<h2>Mediciones (load average antes y después de usar Redis)</h2>
+	<h2>Ejemplo de (mi) vida real</h2>
+	<h3>Mediciones (load average antes y después de usar Redis)</h3>
 	<img src="graph3.png" />
-	<div style="background-color:red; position:absolute; left:380px; height:289px; top:199px; width:2px;"></div>
+	<div style="background-color:red; position:absolute; left:441px; height:289px; top:265px; width:2px;"></div>
 </div>
 <div class="slide">
 	<h2 class="preguntas">&iquest;Preguntas?</h2>
