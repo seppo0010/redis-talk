@@ -97,7 +97,7 @@ var remoteClient = {
 			var data = jQuery.parseJSON(evt.data);
 			if (data.type == 'status') {
 				$('#current-slide').text(data.data.currentSlide + 1);
-				$('#notes').text(data.data.notes);
+				$('#notes').html(data.data.notes);
 			}
 			if (data.type == 'url') {
 				$this.url = data.data;
