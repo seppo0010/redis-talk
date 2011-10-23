@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Beneficiarte de agregar Redis a tu servidor</title>
 	<meta name="viewport" content="width=1024, user-scalable=no">
 	<link rel="stylesheet" href="deck.js/core/deck.core.css" type="text/css">
@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="deck.js/extensions/status/deck.status.css" type="text/css">
 	<link rel="stylesheet" href="../deck-remote/deck.remote.css" type="text/css">
 	<link rel="stylesheet" href="./seppo.css" type="text/css">
-	<script src="deck.js/modernizr.custom.js"></script>
+	<script src="deck.js/modernizr.custom.js" type="text/javascript"></script>
 </head>
 <body class="deck-container" style="width:1024px;">
 
@@ -23,7 +23,7 @@
 </div>
 <div class="slide">
 	<h2>Un poco de m&iacute;</h2>
-	<img id="gatos" src="gatos.jpg" class="slide" />
+	<img id="gatos" src="gatos.jpg" alt="" />
 	<p>Tengo dos gatos</p>
 	<p>Soy malo haciendo presentaciones</p>
 	<p>Trabajo haciendo aplicaciones para iOS desde 2008, en general con un backend web en PHP o Django.</p>
@@ -43,36 +43,36 @@
 <div class="slide">
 	<span class="hidden-notes">Cadena de bytes. Binary safe. Encoding safe.</span>
 	<h2>Strings</h2>
-	<p>redis&gt; <span class="slide">SET miclave mivalor</span><br />
-	<span class="slide"><span class="server-reply">OK</span><br />
-	redis&gt; </span><span class="slide" />APPEND miclave " de prueba"</span><br />
-	<span class="slide"><span class="server-reply">(integer) 17</span><br />
-	redis&gt; </span><span class="slide" />GET miclave</span><br />
-	<span class="slide"><span class="server-reply">"mivalor de prueba"</span><br />
-	redis&gt; </span><span class="slide" />SUBSTR miclave 10 -1<span class="hidden-notes">Los valores negativos empiezan a contar desde el final.</span></span><br />
-	<span class="slide"><span class="server-reply">" prueba"</span><br />
-	redis&gt; </span><span class="slide" />SET int 1</span><br />
-	<span class="slide"><span class="server-reply">OK</span><br />
-	redis&gt; </span><span class="slide" />INCR int</span><br />
-	<span class="slide"><span class="server-reply">(integer) 2</span><br />
-	redis&gt; </span><span class="slide" />INCRBY int 5</span><br />
-	<span class="slide"><span class="server-reply">(integer) 7</span></span>
+	<p>redis&gt; <span>SET miclave mivalor</span><br />
+	<span><span class="server-reply">OK</span><br />
+	redis&gt; </span><span>APPEND miclave " de prueba"</span><br />
+	<span><span class="server-reply">(integer) 17</span><br />
+	redis&gt; </span><span>GET miclave</span><br />
+	<span><span class="server-reply">"mivalor de prueba"</span><br />
+	redis&gt; </span><span>SUBSTR miclave 10 -1<span class="hidden-notes">Los valores negativos empiezan a contar desde el final.</span></span><br />
+	<span><span class="server-reply">" prueba"</span><br />
+	redis&gt; </span><span>SET int 1</span><br />
+	<span><span class="server-reply">OK</span><br />
+	redis&gt; </span><span>INCR int</span><br />
+	<span><span class="server-reply">(integer) 2</span><br />
+	redis&gt; </span><span>INCRBY int 5</span><br />
+	<span><span class="server-reply">(integer) 7</span></span>
 </div>
 <div class="slide">
 	<span class="hidden-notes">Lista de strings ordenada por inserción (FIFO/LIFO).</span>
 	<h2>Lists</h2>
-	<p>redis&gt; <span class="slide">RPUSH milista A<span class="hidden-notes">Insertando por la derecha.</span></span><br />
-	<span class="slide"><span class="server-reply">(integer) 1</span><br />
-	redis&gt; </span><span class="slide" />RPUSH milista B</span><br />
-	<span class="slide"><span class="server-reply">(integer) 2</span><br />
-	redis&gt; </span><span class="slide" />RPUSH milista C</span><br />
-	<span class="slide"><span class="server-reply">(integer) 3</span><br />
-	redis&gt; </span><span class="slide" />LPOP milista<span class="hidden-notes">Leyendo y borrando por la izquierda (FIFO).</span></span><br />
-	<span class="slide"><span class="server-reply">"A"</span><br />
-	redis&gt; </span><span class="slide" />LLEN milista</span><br />
-	<span class="slide"><span class="server-reply">(integer) 2</span><br />
-	redis&gt; </span><span class="slide" />LRANGE milista 0 -1</span><br />
-	<span class="slide"><span class="server-reply">
+	<p>redis&gt; <span>RPUSH milista A<span class="hidden-notes">Insertando por la derecha.</span></span><br />
+	<span><span class="server-reply">(integer) 1</span><br />
+	redis&gt; </span><span>RPUSH milista B</span><br />
+	<span><span class="server-reply">(integer) 2</span><br />
+	redis&gt; </span><span>RPUSH milista C</span><br />
+	<span><span class="server-reply">(integer) 3</span><br />
+	redis&gt; </span><span>LPOP milista<span class="hidden-notes">Leyendo y borrando por la izquierda (FIFO).</span></span><br />
+	<span><span class="server-reply">"A"</span><br />
+	redis&gt; </span><span>LLEN milista</span><br />
+	<span><span class="server-reply">(integer) 2</span><br />
+	redis&gt; </span><span>LRANGE milista 0 -1</span><br />
+	<span><span class="server-reply">
 	1) "B"<br />
 	2) "C"
 	</span></span>
@@ -80,62 +80,62 @@
 <div class="slide">
 	<span class="hidden-notes">Conjunto de strings desordenado.</span>
 	<h2>Sets</h2>
-	<p>redis&gt; <span class="slide">SADD letras A</span><br />
-	<span class="slide"><span class="server-reply">(integer) 1</span><br />
-	redis&gt; </span><span class="slide" />SADD letras A</span><br />
-	<span class="slide"><span class="server-reply">(integer) 0</span><br />
-	redis&gt; </span><span class="slide" />SADD letras B</span><br />
-	<span class="slide"><span class="server-reply">(integer) 2</span><br />
-	redis&gt; </span><span class="slide" />SADD letras C</span><br />
-	<span class="slide"><span class="server-reply">(integer) 3</span><br />
-	redis&gt; </span><span class="slide" />SCARD letras<span class="hidden-notes">Saber la cardinalidad.</span></span><br />
-	<span class="slide"><span class="server-reply">(integer) 3</span><br />
-	redis&gt; </span><span class="slide" />SADD vocales A E I O U</span><br />
-	<span class="slide"><span class="server-reply">(integer) 5</span><br />
-	redis&gt; </span><span class="slide" />SINTER letras vocales</span><br />
-	<span class="slide"><span class="server-reply">
+	<p>redis&gt; <span>SADD letras A</span><br />
+	<span><span class="server-reply">(integer) 1</span><br />
+	redis&gt; </span><span>SADD letras A</span><br />
+	<span><span class="server-reply">(integer) 0</span><br />
+	redis&gt; </span><span>SADD letras B</span><br />
+	<span><span class="server-reply">(integer) 2</span><br />
+	redis&gt; </span><span>SADD letras C</span><br />
+	<span><span class="server-reply">(integer) 3</span><br />
+	redis&gt; </span><span>SCARD letras<span class="hidden-notes">Saber la cardinalidad.</span></span><br />
+	<span><span class="server-reply">(integer) 3</span><br />
+	redis&gt; </span><span>SADD vocales A E I O U</span><br />
+	<span><span class="server-reply">(integer) 5</span><br />
+	redis&gt; </span><span>SINTER letras vocales</span><br />
+	<span><span class="server-reply">
 	1) "A"
 	</span></span>
 </div>
 <div class="slide">
 	<span class="hidden-notes">Conjunto de strings ordenado. Cada string tiene un único valor numérico.</span>
 	<h2>Sorted Sets</h2>
-	<p>redis&gt; <span class="slide">ZADD misortedset 10 j</span><br />
-	<span class="slide"><span class="server-reply">(integer) 1</span><br />
-	redis&gt; </span><span class="slide" />ZADD misortedset 26 z</span><br />
-	<span class="slide"><span class="server-reply">(integer) 1</span><br />
-	redis&gt; </span><span class="slide" />ZADD misortedset 1 a</span><br />
-	<span class="slide"><span class="server-reply">(integer) 1</span><br />
-	redis&gt; </span><span class="slide" />ZRANGE misortedset 0 1<span class="hidden-notes">Consulta por posición.</span></span><br />
-	<span class="slide"><span class="server-reply">
+	<p>redis&gt; <span>ZADD misortedset 10 j</span><br />
+	<span><span class="server-reply">(integer) 1</span><br />
+	redis&gt; </span><span>ZADD misortedset 26 z</span><br />
+	<span><span class="server-reply">(integer) 1</span><br />
+	redis&gt; </span><span>ZADD misortedset 1 a</span><br />
+	<span><span class="server-reply">(integer) 1</span><br />
+	redis&gt; </span><span>ZRANGE misortedset 0 1<span class="hidden-notes">Consulta por posición.</span></span><br />
+	<span><span class="server-reply">
 	1) "a"<br />
 	2) "j"
 	</span><br />
-	redis&gt; </span><span class="slide" />ZRANGEBYSCORE misortedset 0 1<span class="hidden-notes">Consulta por valor.</span></span><br />
-	<span class="slide"><span class="server-reply">1) "a"</span><br />
-	redis&gt; </span><span class="slide" />ZSCORE misortedset j</span><br />
-	<span class="slide"><span class="server-reply">(integer) 10</span><br />
-	redis&gt; </span><span class="slide" />ZCOUNT misortedset 1 10</span><br />
-	<span class="slide"><span class="server-reply">(integer) 2</span></span>
+	redis&gt; </span><span>ZRANGEBYSCORE misortedset 0 1<span class="hidden-notes">Consulta por valor.</span></span><br />
+	<span><span class="server-reply">1) "a"</span><br />
+	redis&gt; </span><span>ZSCORE misortedset j</span><br />
+	<span><span class="server-reply">(integer) 10</span><br />
+	redis&gt; </span><span>ZCOUNT misortedset 1 10</span><br />
+	<span><span class="server-reply">(integer) 2</span></span>
 </div>
 <div class="slide">
 	<span class="hidden-notes">Mapa de string clave a string valor.</span>
 	<h2>Hash</h2>
-	<p>redis&gt; <span class="slide">HMSET mihash nombre sebastian edad 26</span><br />
-	<span class="slide"><span class="server-reply">OK</span><br />
-	redis&gt; </span><span class="slide" />HGET mihash nombre</span><br />
-	<span class="slide"><span class="server-reply">"sebastian"</span><br />
-	redis&gt; </span><span class="slide" />HVALS mihash</span><br />
-	<span class="slide"><span class="server-reply">
+	<p>redis&gt; <span>HMSET mihash nombre sebastian edad 26</span><br />
+	<span><span class="server-reply">OK</span><br />
+	redis&gt; </span><span>HGET mihash nombre</span><br />
+	<span><span class="server-reply">"sebastian"</span><br />
+	redis&gt; </span><span>HVALS mihash</span><br />
+	<span><span class="server-reply">
 	1) "sebastian"<br />
 	2) "26"
 	</span><br />
-	redis&gt; </span><span class="slide" />HINCRBY mihash edad 1</span><br />
-	<span class="slide"><span class="server-reply">(integer) 27</span><br />
-	redis&gt; </span><span class="slide" />HSETNX mihash edad 27</span><br />
-	<span class="slide"><span class="server-reply">(integer) 0</span><br />
-	redis&gt; </span><span class="slide" />HSETNX mihash profesi&oacute;n programador</span><br />
-	<span class="slide"><span class="server-reply">(integer) 1</span></span>
+	redis&gt; </span><span>HINCRBY mihash edad 1</span><br />
+	<span><span class="server-reply">(integer) 27</span><br />
+	redis&gt; </span><span>HSETNX mihash edad 27</span><br />
+	<span><span class="server-reply">(integer) 0</span><br />
+	redis&gt; </span><span>HSETNX mihash profesi&oacute;n programador</span><br />
+	<span><span class="server-reply">(integer) 1</span></span>
 </div>
 <div class="slide">
 	<span class="hidden-notes">La idea no es abandonar el motor de base de datos que tengan, sea lo que sea, en favor de Redis, sino que Redis se puede sumar a las capas.</span>
@@ -237,8 +237,8 @@
 			while (1) {<br />
 			&nbsp;&nbsp;<span class="redis">WATCH max_scores</span><br />
 			&nbsp;&nbsp;score  = <span class="redis">ZSCORE max_scores seppo</span><br />
-			&nbsp;&nbsp;if (score > 46) {<br />
-			&nbsp;&nbsp;&nbsp;&nbsp;<span class="redis">MULTI<br />
+			&nbsp;&nbsp;if (score &gt; 46) {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="redis">MULTI</span><br />
 			&nbsp;&nbsp;&nbsp;&nbsp;<span class="redis">ZREM max_scores seppo</span><br />
 			&nbsp;&nbsp;&nbsp;&nbsp;<span class="redis">ZADD max_scores 46 seppo</span><br />
 			&nbsp;&nbsp;&nbsp;&nbsp;result = <span class="redis">EXEC</span><br />
@@ -312,23 +312,23 @@
 	<p>Sorted Set en la clave "PN".</p>
 	<p>El "score" es la fecha en que debe ser enviado (timestamp).</p>
 	<p>El valor es el device_id.</p>
-	<p>C&oacute;mo los valores son únicos para el Sorted Set, las siguientes fechas de notificaci&oacute;n se guarda en una lista, ordenados, por dispositivo ("PN:<device_id>").</p>
+	<p>C&oacute;mo los valores son únicos para el Sorted Set, las siguientes fechas de notificaci&oacute;n se guarda en una lista, ordenados, por dispositivo ("PN:&lt;device_id&gt;").</p>
 	<p>Ej: si tengo que notificar al device "qwe" en los momentos 1, 3, 7 y 23 voy a agregar al Sorted Set "qwe" con valor 1 y crear una lista en la clave "PN:qwe" con los valores "3", "7" y "23".</p>
 </div>
 <div class="slide">
 	<h2>Ejemplo de (mi) vida real</h2>
 	<h3>&iquest;C&oacute;mo se agendan las notificaciones?</h3>
-	<img src="code1.png" />
+	<img src="code1.png" alt="" />
 </div>
 <div class="slide">
 	<h2>Ejemplo de (mi) vida real</h2>
 	<h3>&iquest;C&oacute;mo veo que notificaciones enviar??</h3>
-	<img src="code2.png" />
+	<img src="code2.png" alt="" />
 </div>
 <div class="slide">
 	<h2>Ejemplo de (mi) vida real</h2>
 	<h3>Después de enviar la notificaci&oacute;n, ¿C&oacute;mo se agenda la siguiente?</h3>
-	<img src="code3.png" />
+	<img src="code3.png" alt="" />
 </div>
 <div class="slide">
 	<h2>Ejemplo de (mi) vida real</h2>
@@ -341,17 +341,17 @@
 <div class="slide">
 	<h2>Ejemplo de (mi) vida real</h2>
 	<h3>Mediciones (cantidad de mensajes encolados)</h3>
-	<img src="graph1.png" />
+	<img src="graph1.png" alt="" />
 </div>
 <div class="slide">
 	<h2>Ejemplo de (mi) vida real</h2>
 	<h3>Mediciones (consumo de memoria)</h3>
-	<img src="graph2.png" />
+	<img src="graph2.png" alt="" />
 </div>
 <div class="slide">
 	<h2>Ejemplo de (mi) vida real</h2>
 	<h3>Mediciones (load average antes y después de usar Redis)</h3>
-	<img src="graph3.png" />
+	<img src="graph3.png" alt="" />
 	<div style="background-color:red; position:absolute; left:441px; height:289px; top:265px; width:2px;"></div>
 </div>
 <div class="slide">
@@ -380,18 +380,17 @@
 </div>
 <form action="." method="get" class="goto-form">
 	<label for="goto-slide">Go to slide:</label>
-	<input type="number" name="slidenum" id="goto-slide">
+	<input type="text" name="slidenum" id="goto-slide">
 	<input type="submit" value="Go">
 </form>
-<p class="deck-status"><span class="deck-status-current"></span>/<span class="deck-status-total"></span></p>
-</div>
-<script src="jquery.js"></script>
-<script src="deck.js/core/deck.core.js"></script>
-<script src="deck.js/extensions/goto/deck.goto.js"></script>
-<script src="deck.js/extensions/status/deck.status.js"></script>
-<script src="../deck-remote/deck.remote.js"></script>
-<script src="../deck-remote/json2.js"></script>
-<script>
+<p class="deck-status"><span class="deck-status-current">&nbsp;</span>/<span class="deck-status-total">&nbsp;</span></p>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="deck.js/core/deck.core.js"></script>
+<script type="text/javascript" src="deck.js/extensions/goto/deck.goto.js"></script>
+<script type="text/javascript" src="deck.js/extensions/status/deck.status.js"></script>
+<script type="text/javascript" src="../deck-remote/deck.remote.js"></script>
+<script type="text/javascript" src="../deck-remote/json2.js"></script>
+<script type="text/javascript">
 	$(function() {
 		$.deck('.slide');$.deck('remoteInit');
 	});
