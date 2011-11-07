@@ -154,30 +154,30 @@
 	<h2>Mostrar los últimos ítems de una lista</h2>
 	<p>Ejemplo: comentarios recientes</p>
 	<table>
-		<thead class="slide">
+		<thead>
 			<tr>
 				<th>SQL</th>
 				<th>Redis</th>
 			</tr>
 		</thead>
-		<tr class="slide">
+		<tr>
 			<th colspan="2">Insertar un registro</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>INSERT INTO latest_comments (time, comment_id)<br /> VALUES (NOW(), &lt;ID&gt;)</td>
 			<td>LPUSH latest.comments &lt;ID&gt;</td>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<th colspan="2">Seleccionar los &uacute;ltimos 10</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>SELECT comment_id FROM latest_comments<br />ORDER BY time DESC LIMIT 10</td>
 			<td>LRANGE latest.comments 0 9</td>
-		</tr class="slide">
-		<tr class="slide">
+		</tr>
+		<tr>
 			<th colspan="2">Borrar los anteriores a los &uacute;ltimos 10</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>DELETE FROM latest_comments LIMIT 10, ?</td>
 			<td>LTRIM latest.comments 0 9</td>
 		</tr>
@@ -187,37 +187,37 @@
 	<span class="hidden-notes">Cada usuario puede registrar su máximo puntaje en el servidor.</span>
 	<h2>Tabla de máximos puntajes</h2>
 	<table>
-		<thead class="slide">
+		<thead>
 			<tr>
 				<th>SQL</th>
 				<th>Redis</th>
 			</tr>
 		</thead>
-		<tr class="slide">
+		<tr>
 			<th colspan="2">Buscar el puntaje de un usuario</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>SELECT score FROM max_scores <br />WHERE username = 'seppo'</td>
 			<td>ZSCORE max_scores seppo</td>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<th colspan="2">Agregarle puntuaci&oacute;n a un usuario</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>INSERT INTO max_scores (score, username)<br /> VALUES (46, 'seppo')</td>
 			<td>ZADD max_scores 46 seppo</td>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<th colspan="2">Lista de usuarios y puntajes</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>SELECT * FROM max_scores<br /> ORDER BY score DESC LIMIT 100</td>
 			<td>ZREVRANGE max_scores 0 99 WITHSCORES</td>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<th colspan="2">Posici&oacute;n de un usuario en la tabla general</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>SELECT COUNT(*) FROM max_scores<br /> WHERE score &gt; (SELECT score <br />FROM max_scores WHERE username = 'seppo')</td>
 			<td>ZRANK max_scores seppo</td>
 		</tr>
@@ -227,20 +227,20 @@
 	<span class="hidden-notes">Pero para ser honesto, simplifiqué un poco... el caso más común sería este</span>
 	<h2>Tabla de máximos puntajes</h2>
 	<table>
-		<tr class="slide">
+		<tr>
 			<th colspan="2">Agregarle puntuaci&oacute;n a un usuario o actualizarlo si tenía un valor menor</th>
 		</tr>
 		<tr>
-			<th class="slide">SQL</th>
+			<th>SQL</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>INSERT INTO max_scores (score, username) VALUES
 			(46, 'seppo') ON DUPLICATE KEY UPDATE score = MAX(score, 46);</td>
 		</tr>
 		<tr>
-			<th class="slide">Redis</th>
+			<th>Redis</th>
 		</tr>
-		<tr class="slide">
+		<tr>
 			<td>
 			while (1) {<br />
 			&nbsp;&nbsp;<span class="redis">WATCH max_scores</span><br />
@@ -264,28 +264,28 @@
 <div class="slide">
 	<h2>Visitantes únicos</h2>
 	<table>
-		<thead class="slide">
+		<thead>
 			<tr>
 				<th>Redis</th>
 			</tr>
 		</thead>
 		<tr>
-			<th class="slide">Agregar un visitante, si no existe</th>
+			<th>Agregar un visitante, si no existe</th>
 		</tr>
 		<tr>
-			<td class="slide">SADD page:&lt;day&gt;:&lt;page_id&gt; &lt;user_id&gt;</td>
+			<td>SADD page:&lt;day&gt;:&lt;page_id&gt; &lt;user_id&gt;</td>
 		</tr>
 		<tr>
-			<th class="slide">Calcular usuarios</th>
+			<th>Calcular usuarios</th>
 		</tr>
 		<tr>
-			<td class="slide">SCARD page:&lt;day&gt;:&lt;page_id&gt;</td>
+			<td>SCARD page:&lt;day&gt;:&lt;page_id&gt;</td>
 		</tr>
 		<tr>
-			<th class="slide">Saber si un usuario ya vio una página en el día</th>
+			<th>Saber si un usuario ya vio una página en el día</th>
 		</tr>
 		<tr>
-			<td class="slide">SISMEMBER page:&lt;day&gt;:&lt;page_id&gt; &lt;user_id&gt;</td>
+			<td>SISMEMBER page:&lt;day&gt;:&lt;page_id&gt; &lt;user_id&gt;</td>
 		</tr>
 	</table>
 </div>
