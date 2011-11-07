@@ -1,0 +1,1 @@
+EVAL "local s = tonumber(redis.call('zscore', KEYS[1], ARGV[2])) if s < tonumber(ARGV[1]) then redis.call('zrem', KEYS[1], ARGV[2]) redis.call('zadd', KEYS[1], ARGV[1], ARGV[2]) return tonumber(ARGV[1]) end return s" 1 max_scores 12 seppo
